@@ -23,7 +23,7 @@ export default async function Home() {
     <div className='layout'>
       <h1>Public Feed</h1>
       <main>
-        {feed.map((post) => (
+        {feed.map((post: any) => (
           <div key={post.id} className={styles.post}>
             <Post post={post} />
           </div>
