@@ -1,23 +1,33 @@
-.bold {
+.nav {
+  padding: 0 28px;
+  margin-bottom: 20px;
+}
+
+.right,
+.left,
+.nav {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 4px;
+}
+
+.gap {
+  flex: 1 1 auto;
+}
+
+.left [data-active='true'] {
   font-weight: bold;
 }
 
-.nav a {
-  text-decoration: none;
-  color: #000;
-  display: inline-block;
+.left a {
+  border: 1px solid grey;
+  border-radius: 3px;
+  padding: 8px 16px;
 }
 
-.left a[data-active='true'] {
-  color: gray;
-}
-
-.nav a + .nav a {
-  margin-left: 1rem;
-}
-
-.nav {
-  display: flex;
-  padding: 2rem;
-  align-items: center;
+.right button {
+  border: 1px solid grey;
+  border-radius: 3px;
+  padding: 8px 16px;
 }
