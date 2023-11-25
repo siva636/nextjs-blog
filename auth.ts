@@ -1,3 +1,4 @@
+import { PrismaAdapter } from '@auth/prisma-adapter';
 import { PrismaClient } from '@prisma/client';
 import NextAuth from 'next-auth';
 import type { NextAuthConfig } from 'next-auth';
@@ -8,7 +9,7 @@ const prisma = new PrismaClient();
 
 export const authConfig = {
   debug: true,
-  // adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma),
   providers: [Google, GitHub],
   callbacks: {
     authorized(params) {
