@@ -12,7 +12,7 @@ const Create = () => {
     e.preventDefault();
     try {
       const body = { title, content };
-      await fetch('/api/post', {
+      await fetch('/api/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),

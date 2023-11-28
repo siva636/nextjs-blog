@@ -12,5 +12,5 @@ export async function POST(req: Request) {
       author: { connect: { email: session?.user?.email || '' } },
     },
   });
-  Response.json(result);
+  return Response.json(result);
 }
