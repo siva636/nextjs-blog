@@ -43,3 +43,8 @@ h2 {
   font-size: 2rem;
   font-weight: bold;
 }
+
+.loading {
+  padding: 20px;
+  text-align: center;
+}
