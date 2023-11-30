@@ -11,7 +11,7 @@ export const authConfig = {
   debug: true,
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt' },
-  providers: [Google, GitHub],
+  providers: [Google],
   callbacks: {
     authorized(params) {
       return !!params.auth?.user;
