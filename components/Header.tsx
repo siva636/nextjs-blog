@@ -2,7 +2,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
-import styles from './header.module.css';
 import { usePathname } from 'next/navigation';
 
 const Header: React.FC = () => {
@@ -13,17 +12,17 @@ const Header: React.FC = () => {
   const { data: session, status } = useSession();
 
   let left = (
-    <div className={styles.left}>
-      <Link href='/' data-active={isActive('/')}>
+    <div className='flex justify-start items-center gap-1'>
+      <Link href='/' data-active={isActive('/')} className='button'>
         Feed
       </Link>
     </div>
   );
-  let right = <div className={styles.right}></div>;
+  let right = <div></div>;
 
   if (status === 'loading') {
     right = (
-      <div className={styles.right}>
+      <div className='flex justify-start items-center gap-1'>
         <p>Validating session ...</p>
       </div>
     );
@@ -31,8 +30,8 @@ const Header: React.FC = () => {
 
   if (!session) {
     right = (
-      <div className={styles.right}>
-        <Link href='/api/auth/signin' className={styles.right}>
+      <div className='flex justify-start items-center gap-1'>
+        <Link href='/api/auth/signin' className='button'>
           Log in
         </Link>
       </div>
@@ -41,29 +40,33 @@ const Header: React.FC = () => {
 
   if (session) {
     left = (
-      <div className={styles.left}>
-        <Link href='/' data-active={isActive('/')}>
+      <div className='flex justify-start items-center gap-1'>
+        <Link href='/' data-active={isActive('/')} className='button'>
           Feed
         </Link>
-        <Link href='/drafts' data-active={isActive('/drafts')}>
+        <Link
+          href='/drafts'
+          data-active={isActive('/drafts')}
+          className='button'
+        >
           My drafts
         </Link>
         <Link
           href='/create'
           data-active={isActive('/create')}
-          className={styles.button}
+          className='button'
         >
           New post
         </Link>
       </div>
     );
     right = (
-      <div className={styles.right}>
+      <div className='flex justify-start items-center gap-1'>
         <p>
           {session.user?.name} ({session.user?.email})
         </p>
 
-        <button className={styles.button} onClick={() => signOut()}>
+        <button className='button' onClick={() => signOut()}>
           Log out
         </button>
       </div>
@@ -71,9 +74,9 @@ const Header: React.FC = () => {
   }
 
   return (
-    <nav className={styles.nav}>
+    <nav className='nav flex justify-start items-center gap-1 my-4'>
       {left}
-      <div className={styles.gap}></div>
+      <div className='flex-auto'></div>
       {right}
     </nav>
   );

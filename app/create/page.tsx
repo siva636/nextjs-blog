@@ -42,6 +42,7 @@ const Create = () => {
           value={content}
         />
         <input
+          className='button'
           disabled={!content || !title}
           type='submit'
           value='Save as draft'

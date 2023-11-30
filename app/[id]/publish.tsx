@@ -14,6 +14,7 @@ export default function Publish(props: { id: string }) {
 
   return (
     <button
+      className='button'
       onClick={() => {
         publishPost();
       }}

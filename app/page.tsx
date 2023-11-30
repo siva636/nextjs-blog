@@ -20,7 +20,7 @@ export default async function Home() {
 
   const feed = await getFeed();
   return (
-    <div className='layout'>
+    <div>
       <h1>Public Feed</h1>
       <main>
         {feed.map((post: any) => (
