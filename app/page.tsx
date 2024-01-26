@@ -2,6 +2,7 @@ import prisma from '@/lib/prisma';
 import styles from './feed.module.css';
 import Post from '@/components/Post';
 import { cache } from 'react';
+import LoadingSkeleton from '@/components/loading-skeleton';
 
 export const revalidate = 10;
 

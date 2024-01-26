@@ -1,7 +1,3 @@
-import React from 'react';
+import LoadingSkeleton from '@/components/loading-skeleton';
 
-const loading = () => {
-  return <div className='text-center'>Loading...</div>;
-};
-
-export default loading;
+export default () => <LoadingSkeleton />;
