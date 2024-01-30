@@ -1,5 +1,4 @@
 import ReactMarkdown from 'react-markdown';
-import styles from './post.module.css';
 import prisma from '@/lib/prisma';
 import { auth } from '@/auth';
 import Publish from './publish';
@@ -26,16 +25,14 @@ const page = async ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <div className='layout'>
-      <div className={styles.page}>
-        <h2>{title}</h2>
-        <p>By {post?.author?.name || 'Unknown author'}</p>
-        <ReactMarkdown children={post?.content} />
-        {post?.id &&
-          !post?.published &&
-          userHasValidSession &&
-          postBelongsToUser && <Publish id={post.id} />}
-      </div>
+    <div className='prose'>
+      <h2>{title}</h2>
+      <p>By {post?.author?.name || 'Unknown author'}</p>
+      <ReactMarkdown children={post?.content} />
+      {post?.id &&
+        !post?.published &&
+        userHasValidSession &&
+        postBelongsToUser && <Publish id={post.id} />}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
+import { primaryActionClasses } from '@/app/utils/style-utils';
 
 const Header: React.FC = () => {
   const pathname = usePathname();
@@ -13,7 +14,11 @@ const Header: React.FC = () => {
 
   let left = (
     <div className='flex justify-start items-center gap-1'>
-      <Link href='/' data-active={isActive('/')} className='button'>
+      <Link
+        href='/'
+        data-active={isActive('/')}
+        className={primaryActionClasses()}
+      >
         Feed
       </Link>
     </div>
@@ -31,7 +36,7 @@ const Header: React.FC = () => {
   if (!session) {
     right = (
       <div className='flex justify-start items-center gap-1'>
-        <Link href='/api/auth/signin' className='button'>
+        <Link href='/api/auth/signin' className={primaryActionClasses()}>
           Log in
         </Link>
       </div>
@@ -41,20 +46,24 @@ const Header: React.FC = () => {
   if (session) {
     left = (
       <div className='flex justify-start items-center gap-1'>
-        <Link href='/' data-active={isActive('/')} className='button'>
+        <Link
+          href='/'
+          data-active={isActive('/')}
+          className={primaryActionClasses()}
+        >
           Feed
         </Link>
         <Link
           href='/drafts'
           data-active={isActive('/drafts')}
-          className='button'
+          className={primaryActionClasses()}
         >
           My drafts
         </Link>
         <Link
           href='/create'
           data-active={isActive('/create')}
-          className='button'
+          className={primaryActionClasses()}
         >
           New post
         </Link>
@@ -66,7 +75,7 @@ const Header: React.FC = () => {
           {session.user?.name} ({session.user?.email})
         </p>
 
-        <button className='button' onClick={() => signOut()}>
+        <button className={primaryActionClasses()} onClick={() => signOut()}>
           Log out
         </button>
       </div>
@@ -74,9 +83,8 @@ const Header: React.FC = () => {
   }
 
   return (
-    <nav className='nav flex justify-start items-center gap-1 my-4'>
+    <nav className='nav flex flex-col md:flex-row justify-between items-end gap-1 mt-2 mb-10'>
       {left}
-      <div className='flex-auto'></div>
       {right}
     </nav>
   );

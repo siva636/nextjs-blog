@@ -1,7 +1,10 @@
 'use client';
 import React, { useState } from 'react';
-import styles from './create.module.css';
 import { useRouter } from 'next/navigation';
+import {
+  primaryActionClasses,
+  secondaryActionClasses,
+} from '../utils/style-utils';
 
 const Create = () => {
   const [title, setTitle] = useState('');
@@ -24,34 +27,39 @@ const Create = () => {
   };
 
   return (
-    <div className={styles.page}>
-      <form onSubmit={submitData}>
-        <h1>New Draft</h1>
+    <form className='prose flex flex-col space-y-2' onSubmit={submitData}>
+      <h1>New draft</h1>
+      <input
+        className='rounded border border-gray-400'
+        autoFocus
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder='Title'
+        type='text'
+        value={title}
+      />
+      <textarea
+        className='rounded border border-gray-400'
+        cols={50}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder='Content'
+        rows={8}
+        value={content}
+      />
+      <div className='flex gap-1'>
         <input
-          autoFocus
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder='Title'
-          type='text'
-          value={title}
-        />
-        <textarea
-          cols={50}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder='Content'
-          rows={8}
-          value={content}
-        />
-        <input
-          className='button'
+          className={primaryActionClasses()}
           disabled={!content || !title}
           type='submit'
           value='Save as draft'
         ></input>
-        <button className={styles.back} onClick={() => router.push('/')}>
+        <button
+          className={secondaryActionClasses()}
+          onClick={() => router.push('/')}
+        >
           Cancel
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 

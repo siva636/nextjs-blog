@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { primaryActionClasses } from '../utils/style-utils';
 
 export default function Publish(props: { id: string }) {
   const router = useRouter();
@@ -14,7 +15,7 @@ export default function Publish(props: { id: string }) {
 
   return (
     <button
-      className='button'
+      className={primaryActionClasses()}
       onClick={() => {
         publishPost();
       }}

@@ -1,8 +1,6 @@
 import prisma from '@/lib/prisma';
-import styles from './feed.module.css';
 import Post from '@/components/Post';
 import { cache } from 'react';
-import LoadingSkeleton from '@/components/loading-skeleton';
 
 export const revalidate = 10;
 
@@ -21,11 +19,11 @@ export default async function Home() {
 
   const feed = await getFeed();
   return (
-    <div>
+    <div className='prose'>
       <h1>Public Feed</h1>
-      <main>
+      <main className='space-y-4'>
         {feed.map((post: any) => (
-          <div key={post.id} className={styles.post}>
+          <div key={post.id}>
             <Post post={post} />
           </div>
         ))}

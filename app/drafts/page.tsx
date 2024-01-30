@@ -1,8 +1,7 @@
 import React from 'react';
-import styles from './drafts.module.css';
 import { auth } from '@/auth';
 import prisma from '@/lib/prisma';
-import Post, { PostProps } from '@/components/Post';
+import Post from '@/components/Post';
 
 const Drafts = async () => {
   const session = await auth();
@@ -20,11 +19,11 @@ const Drafts = async () => {
   });
 
   return (
-    <div className={styles.page}>
+    <div className='prose'>
       <h1>My Drafts</h1>
-      <main>
+      <main className='space-y-4'>
         {drafts.map((post: any) => (
-          <div key={post.id} className={styles.post}>
+          <div key={post.id}>
             <Post post={post} />
           </div>
         ))}
