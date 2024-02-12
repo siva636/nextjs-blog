@@ -30,6 +30,7 @@ const Create = () => {
     <form className='prose flex flex-col space-y-2' onSubmit={submitData}>
       <h1>New draft</h1>
       <input
+        required
         className='rounded border border-gray-400'
         autoFocus
         onChange={(e) => setTitle(e.target.value)}
@@ -38,6 +39,7 @@ const Create = () => {
         value={title}
       />
       <textarea
+        required
         className='rounded border border-gray-400'
         cols={50}
         onChange={(e) => setContent(e.target.value)}
@@ -48,7 +50,6 @@ const Create = () => {
       <div className='flex gap-1'>
         <input
           className={primaryActionClasses()}
-          disabled={!content || !title}
           type='submit'
           value='Save as draft'
         ></input>
