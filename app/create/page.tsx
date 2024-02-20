@@ -7,6 +7,7 @@ import {
 } from '@/app/utils/style-utils';
 import { createDraft } from '@/app/utils/actions';
 import { useFormState, useFormStatus } from 'react-dom';
+import CircularProgressIndicator from '@/components/circular-progress-indicator';
 
 const Create = () => {
   const [title, setTitle] = useState('');
@@ -56,7 +57,13 @@ function Submit() {
         type='submit'
         disabled={pending}
       >
-        {pending ? 'Saving...' : 'Save as draft'}
+        {pending ? (
+          <div className='flex justify-center items-center'>
+            <CircularProgressIndicator /> Saving...
+          </div>
+        ) : (
+          'Save as draft'
+        )}
       </button>
       <button
         className={secondaryActionClasses()}
