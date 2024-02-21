@@ -21,7 +21,19 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-100`}>
         <HeaderWrap />
         {children}
+        <Footer />
       </body>
     </html>
+  );
+}
+
+function Footer() {
+  return (
+    <div className='my-10 border-t border-black'>
+      <div className='text-center'>
+        Next.js Blogging Application by @siva636
+      </div>
+      <div className='text-center'>&copy; 2024</div>
+    </div>
   );
 }
