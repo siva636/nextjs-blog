@@ -1,7 +1,7 @@
 import React from 'react';
 import { auth } from '@/auth';
 import prisma from '@/lib/prisma';
-import Post from '@/components/Post';
+import Post from '@/components/post';
 
 const Drafts = async () => {
   const session = await auth();

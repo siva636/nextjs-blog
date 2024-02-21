@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma';
-import Post from '@/components/Post';
+import Post from '@/components/post';
 import { cache } from 'react';
 
 export const revalidate = 10;

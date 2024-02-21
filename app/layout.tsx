@@ -1,4 +1,4 @@
-import HeaderWrap from '@/components/HeaderWrap';
+import HeaderWrap from '@/components/header-wrap';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';

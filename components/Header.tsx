@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { primaryActionClasses } from '@/app/utils/style-utils';
+import CircularProgressIndicator from './circular-progress-indicator';
 
-const Header: React.FC = () => {
+export default function Header() {
   const pathname = usePathname();
   const isActive: (pathname: string) => boolean = (currentPathname) =>
     pathname === currentPathname;
@@ -28,7 +29,7 @@ const Header: React.FC = () => {
   if (status === 'loading') {
     right = (
       <div className='flex justify-start items-center gap-1'>
-        <p>Validating session ...</p>
+        <CircularProgressIndicator />
       </div>
     );
   }
@@ -88,6 +89,4 @@ const Header: React.FC = () => {
       {right}
     </nav>
   );
-};
-
-export default Header;
+}
