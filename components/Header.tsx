@@ -84,7 +84,7 @@ export default function Header() {
   }
 
   return (
-    <nav className='nav flex flex-col md:flex-row justify-between items-end gap-1 mt-2 mb-10'>
+    <nav className='nav flex flex-col md:flex-row justify-between items-end gap-1 mt-2 mb-10 py-4 border-b border-black'>
       {left}
       {right}
     </nav>
