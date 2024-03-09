@@ -37,6 +37,30 @@ export async function createDraft(previousState: any, formData: FormData) {
   redirect('/drafts');
 }
 
+export async function createPost(previousState: any, formData: FormData) {
+  const session = await auth();
+
+  const data = {
+    title: formData.get('title') as string,
+    content: formData.get('content') as string,
+  };
+
+  const passedData = blogSchema.safeParse(data);
+  if (!passedData.success) {
+    return passedData.error.flatten().fieldErrors;
+  }
+
+  const result = await prisma.post.create({
+    data: {
+      ...data,
+      author: { connect: { email: session?.user?.email || '' } },
+      published: true,
+    },
+  });
+
+  redirect('/');
+}
+
 export async function publishDraft(formData: FormData) {
   const session = await auth();
 
