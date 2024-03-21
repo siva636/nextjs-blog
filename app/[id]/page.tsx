@@ -1,9 +1,11 @@
 import ReactMarkdown from 'react-markdown';
 import prisma from '@/lib/prisma';
 import { auth } from '@/auth';
-import Publish from './publish';
+import PublishForm from './publish/publish-form';
+import DeleteDraftForm from './delete/delete-draft-form';
+import DeletePostForm from './delete/delete-post-form';
 
-const page = async ({ params }: { params: { id: string } }) => {
+export default async function Page({ params }: { params: { id: string } }) {
   const post = await prisma.post.findUnique({
     where: {
       id: String(params?.id),
@@ -30,11 +32,22 @@ const page = async ({ params }: { params: { id: string } }) => {
       <p>By {post?.author?.name || 'Unknown author'}</p>
       <ReactMarkdown children={post?.content} />
       {post?.id &&
+        post?.published &&
+        userHasValidSession &&
+        postBelongsToUser && (
+          <div className='flex gap-1'>
+            <DeletePostForm id={post.id} />
+          </div>
+        )}
+      {post?.id &&
         !post?.published &&
         userHasValidSession &&
-        postBelongsToUser && <Publish id={post.id} />}
+        postBelongsToUser && (
+          <div className='flex gap-1'>
+            <PublishForm id={post.id} />
+            <DeleteDraftForm id={post.id} />
+          </div>
+        )}
     </div>
   );
-};
-
-export default page;
+}

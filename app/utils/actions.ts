@@ -71,3 +71,23 @@ export async function publishDraft(formData: FormData) {
 
   redirect('/');
 }
+
+export async function deleteDraft(formData: FormData) {
+  const session = await auth();
+
+  const post = await prisma.post.delete({
+    where: { id: formData.get('id') as string },
+  });
+
+  redirect('/drafts');
+}
+
+export async function deletePost(formData: FormData) {
+  const session = await auth();
+
+  const post = await prisma.post.delete({
+    where: { id: formData.get('id') as string },
+  });
+
+  redirect('/');
+}
