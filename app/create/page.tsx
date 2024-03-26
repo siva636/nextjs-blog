@@ -8,6 +8,7 @@ import {
 import { createDraft, createPost } from '@/app/utils/actions';
 import { useFormState, useFormStatus } from 'react-dom';
 import CircularProgressIndicator from '@/components/circular-progress-indicator';
+import { Button } from '@/components/button';
 
 export default function Page() {
   const [title, setTitle] = useState('');
