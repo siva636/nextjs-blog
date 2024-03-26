@@ -3,8 +3,9 @@ import React from 'react';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
-import { primaryActionClasses } from '@/app/utils/style-utils';
+import { secondaryActionClasses } from '@/app/utils/style-utils';
 import CircularProgressIndicator from './circular-progress-indicator';
+import { Button } from '@/components/button';
 
 export default function Header() {
   const pathname = usePathname();
@@ -18,7 +19,7 @@ export default function Header() {
       <Link
         href='/'
         data-active={isActive('/')}
-        className={primaryActionClasses()}
+        className={secondaryActionClasses()}
       >
         Feed
       </Link>
@@ -37,7 +38,7 @@ export default function Header() {
   if (!session) {
     right = (
       <div className='flex justify-start items-center gap-1'>
-        <Link href='/api/auth/signin' className={primaryActionClasses()}>
+        <Link href='/api/auth/signin' className={secondaryActionClasses()}>
           Log in
         </Link>
       </div>
@@ -50,21 +51,21 @@ export default function Header() {
         <Link
           href='/'
           data-active={isActive('/')}
-          className={primaryActionClasses()}
+          className={secondaryActionClasses()}
         >
           Feed
         </Link>
         <Link
           href='/drafts'
           data-active={isActive('/drafts')}
-          className={primaryActionClasses()}
+          className={secondaryActionClasses()}
         >
           My drafts
         </Link>
         <Link
           href='/create'
           data-active={isActive('/create')}
-          className={primaryActionClasses()}
+          className={secondaryActionClasses()}
         >
           New post
         </Link>
@@ -76,9 +77,9 @@ export default function Header() {
           {session.user?.name} ({session.user?.email})
         </p>
 
-        <button className={primaryActionClasses()} onClick={() => signOut()}>
+        <Button variant='secondary' onClick={() => signOut()}>
           Log out
-        </button>
+        </Button>
       </div>
     );
   }

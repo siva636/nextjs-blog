@@ -8,7 +8,7 @@ import {
 import { createDraft, createPost } from '@/app/utils/actions';
 import { useFormState, useFormStatus } from 'react-dom';
 import CircularProgressIndicator from '@/components/circular-progress-indicator';
-import { Button } from '@/components/button';
+import { Button } from '@/components/Button';
 
 export default function Page() {
   const [title, setTitle] = useState('');
@@ -69,12 +69,7 @@ function Submit({
 
   return (
     <div className='flex gap-1'>
-      <button
-        className={primaryActionClasses()}
-        type='submit'
-        disabled={pending}
-        onClick={onCreatePost}
-      >
+      <Button type='submit' disabled={pending} onClick={onCreatePost}>
         {pending && !isDraft ? (
           <div className='flex justify-center items-center'>
             <CircularProgressIndicator /> Posting...
@@ -82,9 +77,8 @@ function Submit({
         ) : (
           'Post'
         )}
-      </button>
-      <button
-        className={primaryActionClasses()}
+      </Button>
+      <Button
         type='submit'
         disabled={pending}
         formAction={createDraftAction}
@@ -97,13 +91,13 @@ function Submit({
         ) : (
           'Save as draft'
         )}
-      </button>
-      <button
+      </Button>
+      <Button
         className={secondaryActionClasses()}
         onClick={() => router.push('/')}
       >
         Cancel
-      </button>
+      </Button>
     </div>
   );
 }

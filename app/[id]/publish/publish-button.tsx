@@ -3,12 +3,13 @@
 import { useFormStatus } from 'react-dom';
 import { primaryActionClasses } from '@/app/utils/style-utils';
 import CircularProgressIndicator from '@/components/circular-progress-indicator';
+import { Button } from '@/components/button';
 
 export default function PublishButton() {
   const { pending } = useFormStatus();
 
   return (
-    <button type='submit' className={primaryActionClasses()} disabled={pending}>
+    <Button type='submit' className={primaryActionClasses()} disabled={pending}>
       {pending ? (
         <div className='flex justify-center items-center'>
           <CircularProgressIndicator /> Publishing...
@@ -16,6 +17,6 @@ export default function PublishButton() {
       ) : (
         'Publish'
       )}
-    </button>
+    </Button>
   );
 }
