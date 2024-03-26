@@ -17,10 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className='px-16'>
+    <html lang='en' className='px-4'>
       <body className={`${inter.className} bg-gray-100`}>
         <HeaderWrap />
-        {children}
+        <div className='p-16 bg-white rounded-lg'> {children}</div>
         <Footer />
       </body>
     </html>
@@ -29,11 +29,9 @@ export default function RootLayout({
 
 function Footer() {
   return (
-    <div className='my-10 border-t border-black'>
-      <div className='text-center'>
-        Next.js Blogging Application by @siva636
-      </div>
-      <div className='text-center'>&copy; 2024</div>
+    <div className='my-10 text-center text-gray-500 text-sm'>
+      <div>Next.js Blogging Application by @siva636</div>
+      <div>&copy; 2024</div>
     </div>
   );
 }
