@@ -2,8 +2,9 @@ import HeaderWrap from '@/components/header-wrap';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { cn } from '@/lib/utils';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: 'Blog app',
@@ -18,7 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className='px-4'>
-      <body className={`${inter.className} bg-gray-100`}>
+      <body
+        className={cn(
+          'min-h-screen bg-background font-sans antialiased bg-gray-100',
+          inter.variable
+        )}
+      >
         <HeaderWrap />
         <div className='p-16 bg-white rounded-lg'> {children}</div>
         <Footer />
