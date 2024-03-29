@@ -2,6 +2,7 @@ import React from 'react';
 import { auth } from '@/auth';
 import prisma from '@/lib/prisma';
 import Post from '@/components/post';
+import PostCard from '@/components/post-card';
 
 const Drafts = async () => {
   const session = await auth();
@@ -19,16 +20,19 @@ const Drafts = async () => {
   });
 
   return (
-    <div className='prose'>
-      <h1>My Drafts</h1>
-      <main className='space-y-4'>
+    <>
+      <div className='prose'>
+        <h1>My Drafts</h1>
+        <div></div>
+      </div>
+      <main className='flex flex-wrap justify-start gap-2'>
         {drafts.map((post: any) => (
           <div key={post.id}>
-            <Post post={post} />
+            <PostCard post={post} />
           </div>
         ))}
       </main>
-    </div>
+    </>
   );
 };
 
