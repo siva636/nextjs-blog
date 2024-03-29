@@ -17,10 +17,11 @@ export default async function Home({
     <div>
       <div className='prose'>
         <h1>Public Feed</h1>
+        <div></div>
       </div>
       <main className='flex flex-wrap justify-start gap-2'>
         {feed.map((post: any) => (
-          <div key={post.id} className='w-60 h-60'>
+          <div key={post.id}>
             <PostCard post={post} />
           </div>
         ))}
