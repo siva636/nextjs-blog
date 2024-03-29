@@ -1,11 +1,10 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { secondaryActionClasses } from '@/app/utils/style-utils';
 import { createDraft, createPost } from '@/app/utils/actions';
 import { useFormState, useFormStatus } from 'react-dom';
 import CircularProgressIndicator from '@/components/circular-progress-indicator';
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui/button';
 
 export default function Page() {
   const [title, setTitle] = useState('');
@@ -89,10 +88,7 @@ function Submit({
           'Save as draft'
         )}
       </Button>
-      <Button
-        className={secondaryActionClasses()}
-        onClick={() => router.push('/')}
-      >
+      <Button variant='secondary' onClick={() => router.push('/')}>
         Cancel
       </Button>
     </div>

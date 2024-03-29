@@ -3,9 +3,8 @@ import React from 'react';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
-import { secondaryActionClasses } from '@/app/utils/style-utils';
 import CircularProgressIndicator from './circular-progress-indicator';
-import { Button } from '@/components/button';
+import { Button, buttonVariants } from './ui/button';
 
 export default function Header() {
   const pathname = usePathname();
@@ -19,7 +18,7 @@ export default function Header() {
       <Link
         href='/'
         data-active={isActive('/')}
-        className={secondaryActionClasses()}
+        className={buttonVariants({ variant: 'outline' })}
       >
         Feed
       </Link>
@@ -38,7 +37,10 @@ export default function Header() {
   if (!session) {
     right = (
       <div className='flex justify-start items-center gap-1'>
-        <Link href='/api/auth/signin' className={secondaryActionClasses()}>
+        <Link
+          href='/api/auth/signin'
+          className={buttonVariants({ variant: 'outline' })}
+        >
           Log in
         </Link>
       </div>
@@ -51,21 +53,21 @@ export default function Header() {
         <Link
           href='/'
           data-active={isActive('/')}
-          className={secondaryActionClasses()}
+          className={buttonVariants({ variant: 'outline' })}
         >
           Feed
         </Link>
         <Link
           href='/drafts'
           data-active={isActive('/drafts')}
-          className={secondaryActionClasses()}
+          className={buttonVariants({ variant: 'outline' })}
         >
           My drafts
         </Link>
         <Link
           href='/create'
           data-active={isActive('/create')}
-          className={secondaryActionClasses()}
+          className={buttonVariants({ variant: 'outline' })}
         >
           New post
         </Link>
@@ -77,7 +79,7 @@ export default function Header() {
           {session.user?.name} ({session.user?.email})
         </p>
 
-        <Button variant='secondary' onClick={() => signOut()}>
+        <Button variant='outline' onClick={() => signOut()}>
           Log out
         </Button>
       </div>
