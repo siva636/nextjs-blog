@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma';
 import PostCard from '@/components/post-card';
-import Pagination from '@/components/pagination';
+import MyPagination from '@/components/feed-pagination';
 
 const pageSize = 5;
 
@@ -27,7 +27,7 @@ export default async function Home({
         ))}
       </main>
       <div className='my-8'>
-        <Pagination pages={pages} />
+        <MyPagination pages={pages} />
       </div>
     </div>
   );
