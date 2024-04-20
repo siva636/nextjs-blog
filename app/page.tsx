@@ -1,6 +1,8 @@
 import prisma from '@/lib/prisma';
 import PostCard from '@/components/post-card';
-import MyPagination from '@/components/feed-pagination';
+import { Suspense } from 'react';
+import Loading from './loading';
+import FeedPagination from '@/components/feed-pagination';
 
 const pageSize = 5;
 
@@ -9,16 +11,26 @@ export default async function Home({
 }: {
   searchParams: { page: string | undefined };
 }) {
-  const feed = await getFeed(searchParams.page);
-  const count = await getCount();
-  const pages = Math.ceil(count / pageSize);
-
   return (
-    <div>
+    <>
       <div className='prose'>
         <h1>Public Feed</h1>
         <div></div>
       </div>
+      <Suspense key={searchParams.page} fallback={<Loading />}>
+        <HomeContents page={searchParams.page} />
+      </Suspense>
+    </>
+  );
+}
+
+async function HomeContents({ page }: { page: string | undefined }) {
+  const feed = await getFeed(page);
+  const count = await getCount();
+  const pages = Math.ceil(count / pageSize);
+
+  return (
+    <>
       <main className='flex flex-wrap justify-start gap-2'>
         {feed.map((post: any) => (
           <div key={post.id}>
@@ -27,9 +39,9 @@ export default async function Home({
         ))}
       </main>
       <div className='my-8'>
-        <MyPagination pages={pages} />
+        <FeedPagination pages={pages} />
       </div>
-    </div>
+    </>
   );
 }
 

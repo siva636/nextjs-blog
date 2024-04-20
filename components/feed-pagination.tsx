@@ -7,6 +7,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from './ui/pagination';
+import { undefined } from 'zod';
 
 export default function FeedPagination({ pages }: { pages: number }) {
   const { replace } = useRouter();
@@ -39,25 +40,29 @@ export default function FeedPagination({ pages }: { pages: number }) {
       <Pagination>
         <PaginationContent>
           <PaginationItem>
-            {pageNumber > 1 && (
-              <PaginationPrevious
-                onClick={previous}
-                isActive
-                className='cursor-pointer'
-              />
-            )}
+            <PaginationPrevious
+              onClick={pageNumber > 1 ? previous : () => {}}
+              isActive
+              className={
+                pageNumber > 1
+                  ? 'cursor-pointer'
+                  : 'pointer-events-none opacity-50'
+              }
+            />
           </PaginationItem>
           <PaginationItem>
             {pageNumber} of {pages}
           </PaginationItem>{' '}
           <PaginationItem>
-            {pageNumber < totalPages && (
-              <PaginationNext
-                onClick={next}
-                isActive
-                className='cursor-pointer'
-              />
-            )}
+            <PaginationNext
+              onClick={pageNumber < totalPages ? next : () => {}}
+              isActive
+              className={
+                pageNumber < totalPages
+                  ? 'cursor-pointer'
+                  : 'pointer-events-none opacity-50'
+              }
+            />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
