@@ -27,7 +27,7 @@ export default function Header() {
       <Link
         href='/'
         data-active={isActive('/')}
-        className={buttonVariants({ variant: 'outline' })}
+        className={buttonVariants({ variant: 'ghost' })}
       >
         Feed
       </Link>
@@ -48,7 +48,7 @@ export default function Header() {
       <div className='flex justify-start items-center gap-1'>
         <Link
           href='/api/auth/signin'
-          className={buttonVariants({ variant: 'outline' })}
+          className={buttonVariants({ variant: 'ghost' })}
         >
           Log in
         </Link>
@@ -62,21 +62,21 @@ export default function Header() {
         <Link
           href='/'
           data-active={isActive('/')}
-          className={buttonVariants({ variant: 'outline' })}
+          className={buttonVariants({ variant: 'ghost' })}
         >
           Feed
         </Link>
         <Link
           href='/drafts'
           data-active={isActive('/drafts')}
-          className={buttonVariants({ variant: 'outline' })}
+          className={buttonVariants({ variant: 'ghost' })}
         >
           My drafts
         </Link>
         <Link
           href='/create'
           data-active={isActive('/create')}
-          className={buttonVariants({ variant: 'outline' })}
+          className={buttonVariants({ variant: 'ghost' })}
         >
           New post
         </Link>
@@ -102,7 +102,7 @@ export default function Header() {
                 <CardDescription>{session.user?.email}</CardDescription>
               </CardHeader>
               <CardFooter>
-                <Button variant='outline' onClick={() => signOut()}>
+                <Button variant='ghost' onClick={() => signOut()}>
                   Log out
                 </Button>
               </CardFooter>
