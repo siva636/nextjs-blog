@@ -5,6 +5,15 @@ import { signOut, useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import CircularProgressIndicator from './circular-progress-indicator';
 import { Button, buttonVariants } from './ui/button';
+import Image from 'next/image';
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from './ui/card';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/hover-card';
 
 export default function Header() {
   const pathname = usePathname();
@@ -75,13 +84,31 @@ export default function Header() {
     );
     right = (
       <div className='flex justify-start items-center gap-1'>
-        <p>
-          {session.user?.name} ({session.user?.email})
-        </p>
+        <HoverCard>
+          <HoverCardTrigger asChild>
+            <Image
+              src='/account.png'
+              width={32}
+              className='rounded-full'
+              height={32}
+              alt='Account image'
+            />
+          </HoverCardTrigger>
 
-        <Button variant='outline' onClick={() => signOut()}>
-          Log out
-        </Button>
+          <HoverCardContent>
+            <Card className='border-0 drop-shadow-none'>
+              <CardHeader>
+                <CardTitle>{session.user?.name}</CardTitle>
+                <CardDescription>{session.user?.email}</CardDescription>
+              </CardHeader>
+              <CardFooter>
+                <Button variant='outline' onClick={() => signOut()}>
+                  Log out
+                </Button>
+              </CardFooter>
+            </Card>
+          </HoverCardContent>
+        </HoverCard>
       </div>
     );
   }
