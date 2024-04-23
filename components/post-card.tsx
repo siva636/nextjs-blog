@@ -27,10 +27,16 @@ const PostCard: React.FC<{ post: PostProps }> = ({ post }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{post.title.substring(0, 20)}</CardTitle>
-        <CardDescription>By {authorName}</CardDescription>
+        <CardTitle className='block whitespace-nowrap w-[200px] overflow-hidden text-ellipsis'>
+          {post.title}
+        </CardTitle>
+        <CardDescription className='block whitespace-nowrap w-[200px] overflow-hidden text-ellipsis'>
+          By {authorName}
+        </CardDescription>
       </CardHeader>
-      <CardContent>{`${post.content.substring(0, 50)}...`}</CardContent>
+      <CardContent className='block whitespace-nowrap w-[350px] overflow-hidden text-ellipsis'>
+        {post.content}
+      </CardContent>
       <CardFooter>
         <Button variant='outline' asChild>
           <Link href={post.id}>
