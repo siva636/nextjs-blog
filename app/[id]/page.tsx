@@ -4,6 +4,7 @@ import { auth } from '@/auth';
 import PublishForm from './publish/publish-form';
 import DeleteDraftForm from './delete/delete-draft-form';
 import DeletePostForm from './delete/delete-post-form';
+import Loading from './loading';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const post = await prisma.post.findUnique({
