@@ -13,36 +13,38 @@ export default function Page() {
   const [createDraftError, createDraftAction] = useFormState(createDraft, null);
 
   return (
-    <form className='prose flex flex-col space-y-2' action={createPostAction}>
-      <h1>New post</h1>
-      <input
-        required
-        name='title'
-        className='rounded border border-gray-400'
-        autoFocus
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder='Title'
-        type='text'
-        value={title}
-      />
-      <div className='text-sm text-red-500 pb-2'>
-        {createPostError?.title || createDraftError?.title}
-      </div>
-      <textarea
-        required
-        name='content'
-        className='rounded border border-gray-400'
-        cols={50}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder='Content'
-        rows={8}
-        value={content}
-      />
-      <div className='text-sm text-red-500 pb-2'>
-        {createPostError?.content || createDraftError?.content}
-      </div>
-      <Submit createDraftAction={createDraftAction} />
-    </form>
+    <>
+      <form className='prose flex flex-col space-y-2' action={createPostAction}>
+        <h1>New post</h1>
+        <input
+          required
+          name='title'
+          className='rounded border border-gray-400'
+          autoFocus
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder='Title'
+          type='text'
+          value={title}
+        />
+        <div className='text-sm text-red-500 pb-2'>
+          {createPostError?.title || createDraftError?.title}
+        </div>
+        <textarea
+          required
+          name='content'
+          className='rounded border border-gray-400'
+          cols={50}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder='Content'
+          rows={8}
+          value={content}
+        />
+        <div className='text-sm text-red-500 pb-2'>
+          {createPostError?.content || createDraftError?.content}
+        </div>
+        <Submit createDraftAction={createDraftAction} />
+      </form>
+    </>
   );
 }
 
