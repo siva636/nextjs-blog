@@ -7,13 +7,18 @@ import CircularProgressIndicator from './circular-progress-indicator';
 import { Button, buttonVariants } from './ui/button';
 import Image from 'next/image';
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+
+import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from './ui/card';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/hover-card';
 
 export default function Header() {
   const pathname = usePathname();
@@ -84,8 +89,8 @@ export default function Header() {
     );
     right = (
       <div className='flex justify-start items-center gap-1'>
-        <HoverCard>
-          <HoverCardTrigger asChild>
+        <Popover>
+          <PopoverTrigger asChild>
             <Image
               src='/account.png'
               width={32}
@@ -93,9 +98,9 @@ export default function Header() {
               height={32}
               alt='Account image'
             />
-          </HoverCardTrigger>
+          </PopoverTrigger>
 
-          <HoverCardContent>
+          <PopoverContent className='mx-2'>
             <Card className='border-0 drop-shadow-none'>
               <CardHeader>
                 <CardTitle>{session.user?.name}</CardTitle>
@@ -107,8 +112,8 @@ export default function Header() {
                 </Button>
               </CardFooter>
             </Card>
-          </HoverCardContent>
-        </HoverCard>
+          </PopoverContent>
+        </Popover>
       </div>
     );
   }
