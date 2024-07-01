@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
+import { ThemeProvider } from 'next-themes';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -21,13 +22,20 @@ export default function RootLayout({
     <html lang='en' className='px-4'>
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased bg-gray-100',
+          'min-h-screen bg-background font-sans antialiased',
           inter.variable
         )}
       >
-        <HeaderWrap />
-        <div className='p-16 bg-white rounded-lg'> {children}</div>
-        <Footer />
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <HeaderWrap />
+          <div className='p-16 bg-white rounded-lg'> {children}</div>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
