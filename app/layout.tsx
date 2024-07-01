@@ -28,12 +28,15 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute='class'
-          defaultTheme='system'
+          defaultTheme='dark'
           enableSystem
           disableTransitionOnChange
         >
           <HeaderWrap />
-          <div className='p-16 bg-white rounded-lg'> {children}</div>
+          <div className='p-16 bg-gray-100 dark:bg-slate-400 rounded-lg'>
+            {' '}
+            {children}
+          </div>
           <Footer />
         </ThemeProvider>
       </body>
