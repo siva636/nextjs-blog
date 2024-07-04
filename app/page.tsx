@@ -13,7 +13,7 @@ export default async function Home({
 }) {
   return (
     <>
-      <div className='prose'>
+      <div className='prose dark:prose-invert'>
         <h1>Public Feed</h1>
         <div></div>
       </div>

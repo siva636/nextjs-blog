@@ -21,10 +21,7 @@ export default function RootLayout({
   return (
     <html lang='en' className='px-4'>
       <body
-        className={cn(
-          'min-h-screen bg-background font-sans antialiased',
-          inter.variable
-        )}
+        className={cn('min-h-screen font-sans antialiased', inter.variable)}
       >
         <ThemeProvider
           attribute='class'
@@ -33,7 +30,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <HeaderWrap />
-          <div className='p-16 bg-gray-100 dark:bg-slate-400 rounded-lg'>
+          <div className='p-16 bg-gray-100 dark:bg-gray-800 rounded-lg'>
             {' '}
             {children}
           </div>

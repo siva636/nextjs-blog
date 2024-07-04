@@ -28,7 +28,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className='prose'>
+    <div className='prose dark:prose-invert'>
       <h2>{title}</h2>
       <p>By {post?.author?.name || 'Unknown author'}</p>
       <ReactMarkdown children={post?.content} />

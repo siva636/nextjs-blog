@@ -21,7 +21,7 @@ const Drafts = async () => {
 
   return (
     <>
-      <div className='prose'>
+      <div className='prose dark:prose-invert'>
         <h1>My Drafts</h1>
         <div></div>
       </div>

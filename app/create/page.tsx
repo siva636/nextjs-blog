@@ -14,7 +14,10 @@ export default function Page() {
 
   return (
     <>
-      <form className='prose flex flex-col space-y-2' action={createPostAction}>
+      <form
+        className='prose dark:prose-invert flex flex-col space-y-2'
+        action={createPostAction}
+      >
         <h1>New post</h1>
         <input
           required
