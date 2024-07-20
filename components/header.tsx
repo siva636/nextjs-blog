@@ -129,7 +129,7 @@ export default function Header() {
             <Image
               src='/account.png'
               width={32}
-              className='rounded-full'
+              className='rounded-full cursor-pointer'
               height={32}
               alt='Account image'
             />
