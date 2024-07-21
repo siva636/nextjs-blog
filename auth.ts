@@ -8,6 +8,10 @@ import Google from 'next-auth/providers/google';
 const prisma = new PrismaClient();
 
 export const authConfig = {
+  theme: {
+    logo: 'https://authjs.dev/img/logo-sm.png',
+    colorScheme: 'dark',
+  },
   debug: true,
   // adapter: PrismaAdapter(prisma),
   // session: { strategy: 'jwt' },
