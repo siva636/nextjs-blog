@@ -1,10 +1,9 @@
-import prisma from '@/lib/prisma';
 import PostCard from '@/components/post-card';
 import { Suspense } from 'react';
 import Loading from './loading';
 import FeedPagination from '@/components/feed-pagination';
-
-const pageSize = 5;
+import { pageSize } from './utils/constants';
+import { getCount, getFeed } from './utils/actions';
 
 export default async function Home({
   searchParams,
@@ -14,8 +13,7 @@ export default async function Home({
   return (
     <>
       <div className='prose dark:prose-invert'>
-        <h1>Public Feed</h1>
-        <div></div>
+        <h1 className='mb-4'>Public Feed</h1>
       </div>
       <Suspense key={searchParams.page} fallback={<Loading />}>
         <HomeContents page={searchParams.page} />
@@ -44,25 +42,3 @@ async function HomeContents({ page }: { page: string | undefined }) {
     </>
   );
 }
-
-const getFeed = async (page: string | undefined) => {
-  const pageNumber = page === undefined ? 1 : Number(page);
-  const feed = await prisma.post.findMany({
-    skip: pageSize * (pageNumber - 1),
-    take: pageSize,
-    where: { published: true },
-    include: {
-      author: {
-        select: { name: true },
-      },
-    },
-  });
-  return feed;
-};
-
-const getCount = async () => {
-  const count = await prisma.post.count({
-    where: { published: true },
-  });
-  return count;
-};
