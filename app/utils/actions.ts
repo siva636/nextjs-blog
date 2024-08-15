@@ -7,25 +7,32 @@ import { z } from 'zod';
 import { pageSize } from './constants';
 
 export async function getFeed(page: string | undefined) {
-  const pageNumber = page === undefined ? 1 : Number(page);
-  const feed = await prisma.post.findMany({
-    skip: pageSize * (pageNumber - 1),
-    take: pageSize,
-    where: { published: true },
-    include: {
-      author: {
-        select: { name: true },
+  const pageNumber =
+    Number(page) === 0 || isNaN(Number(page)) ? 1 : Number(page);
+  try {
+    return await prisma.post.findMany({
+      skip: pageSize * (pageNumber - 1),
+      take: pageSize,
+      where: { published: true },
+      include: {
+        author: {
+          select: { name: true },
+        },
       },
-    },
-  });
-  return feed;
+    });
+  } catch (e) {
+    throw Error('Database error');
+  }
 }
 
 export async function getCount() {
-  const count = await prisma.post.count({
-    where: { published: true },
-  });
-  return count;
+  try {
+    return await prisma.post.count({
+      where: { published: true },
+    });
+  } catch (e) {
+    throw Error('Database error');
+  }
 }
 
 const blogSchema = z.object({
