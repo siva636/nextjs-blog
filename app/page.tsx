@@ -5,7 +5,7 @@ import FeedPagination from '@/components/feed-pagination';
 import { pageSize } from './utils/constants';
 import { getCount, getFeed } from './utils/actions';
 
-export default async function Home({
+export default function Home({
   searchParams,
 }: {
   searchParams: { page: string | undefined };
