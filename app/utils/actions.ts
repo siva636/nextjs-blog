@@ -21,6 +21,7 @@ export async function getFeed(page: string | undefined) {
       },
     });
   } catch (e) {
+    console.log(e);
     throw Error('Database error');
   }
 }
@@ -31,6 +32,7 @@ export async function getCount() {
       where: { published: true },
     });
   } catch (e) {
+    console.log(e);
     throw Error('Database error');
   }
 }
@@ -57,13 +59,17 @@ export async function createDraft(previousState: any, formData: FormData) {
     return passedData.error.flatten().fieldErrors;
   }
 
-  const result = await prisma.post.create({
-    data: {
-      ...data,
-      author: { connect: { email: session?.user?.email || '' } },
-    },
-  });
-
+  try {
+    await prisma.post.create({
+      data: {
+        ...data,
+        author: { connect: { email: session?.user?.email || '' } },
+      },
+    });
+  } catch (e) {
+    console.log(e);
+    throw Error('Database error');
+  }
   redirect('/drafts');
 }
 
@@ -80,44 +86,60 @@ export async function createPost(previousState: any, formData: FormData) {
     return passedData.error.flatten().fieldErrors;
   }
 
-  const result = await prisma.post.create({
-    data: {
-      ...data,
-      author: { connect: { email: session?.user?.email || '' } },
-      published: true,
-    },
-  });
-
-  redirect('/');
+  try {
+    await prisma.post.create({
+      data: {
+        ...data,
+        author: { connect: { email: session?.user?.email || '' } },
+        published: true,
+      },
+    });
+  } catch (e) {
+    console.log(e);
+    throw Error('Database error');
+  }
+  redirect('/drafts');
 }
 
 export async function publishDraft(formData: FormData) {
   const session = await auth();
 
-  const post = await prisma.post.update({
-    where: { id: formData.get('id') as string },
-    data: { published: true },
-  });
-
+  try {
+    await prisma.post.update({
+      where: { id: formData.get('id') as string },
+      data: { published: true },
+    });
+  } catch (e) {
+    console.log(e);
+    throw Error('Database error');
+  }
   redirect('/');
 }
 
 export async function deleteDraft(formData: FormData) {
   const session = await auth();
 
-  const post = await prisma.post.delete({
-    where: { id: formData.get('id') as string },
-  });
-
+  try {
+    await prisma.post.delete({
+      where: { id: formData.get('id') as string },
+    });
+  } catch (e) {
+    console.log(e);
+    throw Error('Database error');
+  }
   redirect('/drafts');
 }
 
 export async function deletePost(formData: FormData) {
   const session = await auth();
 
-  const post = await prisma.post.delete({
-    where: { id: formData.get('id') as string },
-  });
-
+  try {
+    await prisma.post.delete({
+      where: { id: formData.get('id') as string },
+    });
+  } catch (e) {
+    console.log(e);
+    throw Error('Database error');
+  }
   redirect('/');
 }
