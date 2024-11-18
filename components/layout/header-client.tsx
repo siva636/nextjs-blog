@@ -2,22 +2,16 @@
 import React from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
-import CircularProgressIndicator from './circular-progress-indicator';
-import { Button, buttonVariants } from './ui/button';
+import CircularProgressIndicator from '../circular-progress-indicator';
+import { Button, buttonVariants } from '../ui/button';
 import Image from 'next/image';
+import Link from 'next/link';
+import ThemeChooser from './theme-chooser';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
 
 import {
   Card,
@@ -25,40 +19,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from './ui/card';
-import Link from 'next/link';
+} from '../ui/card';
 
-export default function Header() {
+export default function HeaderClient() {
   const pathname = usePathname();
   const isActive: (pathname: string) => boolean = (currentPathname) =>
     pathname === currentPathname;
 
   const { data: session, status } = useSession();
-
-  const { setTheme } = useTheme();
-
-  let themeChooser = (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant='outline' size='icon' className='rounded-full'>
-          <Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
-          <Moon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
-          <span className='sr-only'>Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align='end'>
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
 
   let left = (
     <div className='flex justify-start items-center gap-1'>
@@ -84,7 +52,7 @@ export default function Header() {
   if (!session) {
     right = (
       <div className='flex justify-start items-center gap-1'>
-        {themeChooser}
+        <ThemeChooser />
         <Link
           href='/api/auth/signin'
           className={buttonVariants({ variant: 'outline' })}
@@ -123,7 +91,7 @@ export default function Header() {
     );
     right = (
       <div className='flex justify-start items-center gap-1'>
-        {themeChooser}
+        <ThemeChooser />
         <Popover>
           <PopoverTrigger asChild>
             <Image
