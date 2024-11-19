@@ -1,8 +1,8 @@
 'use client';
 
 import { useFormStatus } from 'react-dom';
-import CircularProgressIndicator from '@/components/circular-progress-indicator';
 import { Button } from '@/components/ui/button';
+import { Loader2 } from 'lucide-react';
 
 export default function DeleteButton() {
   const { pending } = useFormStatus();
@@ -11,7 +11,7 @@ export default function DeleteButton() {
     <Button type='submit' disabled={pending} variant='destructive'>
       {pending ? (
         <div className='flex justify-center items-center'>
-          <CircularProgressIndicator /> Deleting...
+          <Loader2 className='animate-spin' /> Deleting...
         </div>
       ) : (
         'Delete'

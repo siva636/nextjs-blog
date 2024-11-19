@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createDraft, createPost } from '@/app/utils/actions';
 import { useFormState, useFormStatus } from 'react-dom';
-import CircularProgressIndicator from '@/components/circular-progress-indicator';
 import { Button } from '@/components/ui/button';
+import { Loader2 } from 'lucide-react';
 
 export default function Page() {
   const [title, setTitle] = useState('');
@@ -73,7 +73,7 @@ function Submit({
       <Button type='submit' disabled={pending} onClick={onCreatePost}>
         {pending && !isDraft ? (
           <div className='flex justify-center items-center'>
-            <CircularProgressIndicator /> Posting...
+            <Loader2 className='animate-spin' /> Posting...
           </div>
         ) : (
           'Post'
@@ -87,7 +87,7 @@ function Submit({
       >
         {pending && isDraft ? (
           <div className='flex justify-center items-center'>
-            <CircularProgressIndicator /> Saving...
+            <Loader2 className='animate-spin' /> Saving...
           </div>
         ) : (
           'Save as draft'

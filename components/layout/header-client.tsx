@@ -109,7 +109,7 @@ export default function HeaderClient() {
   );
 
   return (
-    <nav className='nav flex flex-col md:flex-row justify-between items-end gap-1 my-5 py-4'>
+    <nav className='nav flex flex-col md:flex-row justify-between items-end gap-1 mt-1 mb-5 py-4'>
       {left}
       {right}
     </nav>
