@@ -1,4 +1,4 @@
-import HeaderWrap from '@/components/layout/header';
+import Header from '@/components/layout/header';
 import { Inter } from 'next/font/google';
 import '@/app/globals.css';
 import { cn } from '@/lib/utils';
@@ -26,9 +26,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <HeaderWrap />
+          <Header />
           <div className='p-16 bg-gray-100 dark:bg-gray-800 rounded-lg'>
-            {' '}
             {children}
           </div>
           <Footer />

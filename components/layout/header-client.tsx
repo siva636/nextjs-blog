@@ -2,9 +2,7 @@
 import React from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
-import CircularProgressIndicator from '../circular-progress-indicator';
 import { Button, buttonVariants } from '../ui/button';
-import Image from 'next/image';
 import Link from 'next/link';
 import ThemeChooser from './theme-chooser';
 import {
@@ -20,6 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card';
+import { Avatar, AvatarFallback } from '../ui/avatar';
 
 export default function HeaderClient() {
   const pathname = usePathname();
@@ -29,100 +28,88 @@ export default function HeaderClient() {
   const { data: session, status } = useSession();
 
   let left = (
-    <div className='flex justify-start items-center gap-1'>
-      <Link
-        href='/'
-        data-active={isActive('/')}
-        className={buttonVariants({ variant: 'outline' })}
-      >
-        Feed
-      </Link>
-    </div>
-  );
-  let right = <div></div>;
-
-  if (status === 'loading') {
-    right = (
-      <div className='flex justify-start items-center gap-1'>
-        <CircularProgressIndicator />
-      </div>
-    );
-  }
-
-  if (!session) {
-    right = (
-      <div className='flex justify-start items-center gap-1'>
-        <ThemeChooser />
-        <Link
-          href='/api/auth/signin'
-          className={buttonVariants({ variant: 'outline' })}
-        >
-          Log in
-        </Link>
-      </div>
-    );
-  }
-
-  if (session) {
-    left = (
+    <>
       <div className='flex justify-start items-center gap-1'>
         <Link
           href='/'
-          data-active={isActive('/')}
-          className={buttonVariants({ variant: 'outline' })}
+          className={`${buttonVariants({ variant: 'link' })} ${
+            isActive('/') ? 'underline font-extrabold' : ''
+          }`}
         >
           Feed
         </Link>
-        <Link
-          href='/drafts'
-          data-active={isActive('/drafts')}
-          className={buttonVariants({ variant: 'outline' })}
-        >
-          My drafts
-        </Link>
-        <Link
-          href='/create'
-          data-active={isActive('/create')}
-          className={buttonVariants({ variant: 'outline' })}
-        >
-          New post
-        </Link>
-      </div>
-    );
-    right = (
-      <div className='flex justify-start items-center gap-1'>
-        <ThemeChooser />
-        <Popover>
-          <PopoverTrigger asChild>
-            <Image
-              src='/account.png'
-              width={32}
-              className='rounded-full cursor-pointer'
-              height={32}
-              alt='Account image'
-            />
-          </PopoverTrigger>
 
-          <PopoverContent className='mx-2'>
-            <Card className='border-0 drop-shadow-none'>
-              <CardHeader>
-                <CardTitle>{session.user?.name}</CardTitle>
-                <CardDescription>{session.user?.email}</CardDescription>
-              </CardHeader>
-              <CardFooter>
-                <Button variant='outline' onClick={() => signOut()}>
-                  Log out
-                </Button>
-              </CardFooter>
-            </Card>
-          </PopoverContent>
-        </Popover>
+        {session && (
+          <div className='flex justify-start items-center gap-1'>
+            <Link
+              href='/drafts'
+              className={`${buttonVariants({ variant: 'link' })} ${
+                isActive('/drafts') ? 'underline font-extrabold' : ''
+              }`}
+            >
+              My drafts
+            </Link>
+            <Link
+              href='/create'
+              className={`${buttonVariants({ variant: 'link' })} ${
+                isActive('/create') ? 'underline font-extrabold' : ''
+              }`}
+            >
+              New post
+            </Link>
+          </div>
+        )}
       </div>
-    );
-  }
+    </>
+  );
+
+  let right = (
+    <>
+      {!session && (
+        <div className='flex justify-start items-center gap-1'>
+          <ThemeChooser />
+          <Link
+            href='/api/auth/signin'
+            className={buttonVariants({ variant: 'link' })}
+          >
+            Log in
+          </Link>
+        </div>
+      )}
+
+      {session && (
+        <div className='flex justify-start items-center gap-1'>
+          <ThemeChooser />
+          <Popover>
+            <PopoverTrigger asChild>
+              <Avatar className='cursor-pointer dark:invert'>
+                <AvatarFallback>
+                  {session!.user?.name?.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
+            </PopoverTrigger>
+
+            <PopoverContent className='m-2'>
+              <Card className='border-0 drop-shadow-none'>
+                <CardHeader>
+                  <CardTitle>{session!.user?.name}</CardTitle>
+                  <CardDescription>{session!.user?.email}</CardDescription>
+                </CardHeader>
+                <CardFooter>
+                  <Button variant='ghost' onClick={() => signOut()}>
+                    Log out
+                  </Button>
+                </CardFooter>
+              </Card>
+            </PopoverContent>
+          </Popover>
+        </div>
+      )}
+    </>
+  );
 
   return (
-    <nav className='nav flex flex-col md:flex-row justify-between items-end gap-1 mt-2 mb-10 py-4'>
+    <nav className='nav flex flex-col md:flex-row justify-between items-end gap-1 my-5 py-4'>
       {left}
       {right}
     </nav>
