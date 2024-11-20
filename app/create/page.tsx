@@ -69,7 +69,10 @@ function Submit({
   }
 
   return (
-    <div className='flex gap-1'>
+    <div className='flex gap-2'>
+      <Button variant='outline' onClick={() => router.push('/')}>
+        Cancel
+      </Button>
       <Button type='submit' disabled={pending} onClick={onCreatePost}>
         {pending && !isDraft ? (
           <div className='flex justify-center items-center'>
@@ -92,9 +95,6 @@ function Submit({
         ) : (
           'Save as draft'
         )}
-      </Button>
-      <Button variant='secondary' onClick={() => router.push('/')}>
-        Cancel
       </Button>
     </div>
   );
