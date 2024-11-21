@@ -22,7 +22,7 @@ export type PostProps = {
   published: boolean;
 };
 
-const PostCard: React.FC<{ post: PostProps }> = ({ post }) => {
+export default function PostCard({ post }: { post: PostProps }) {
   const authorName = post.author ? post.author.name : 'Unknown author';
   return (
     <Card>
@@ -39,13 +39,11 @@ const PostCard: React.FC<{ post: PostProps }> = ({ post }) => {
       </CardContent>
       <CardFooter>
         <Button variant='outline' asChild>
-          <Link href={post.id}>
+          <Link href={`/${post.id}`}>
             Read more <ChevronRightIcon className='h-4 w-4' />
           </Link>
         </Button>
       </CardFooter>
     </Card>
   );
-};
-
-export default PostCard;
+}

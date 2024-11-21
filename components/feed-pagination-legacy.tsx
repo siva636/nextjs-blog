@@ -1,5 +1,5 @@
 'use client';
-import { useRouter, useParams } from 'next/navigation';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import {
   Pagination,
   PaginationContent,
@@ -10,23 +10,28 @@ import {
 
 export default function FeedPagination({ pages }: { pages: number }) {
   const { replace } = useRouter();
-  const params = useParams();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  let pageNumber: number = Number(params.page);
+  const urlSearchParams = new URLSearchParams(searchParams);
+  let page = urlSearchParams.get('page');
+  let pageNumber: number = page === null ? 1 : Number(page);
   let totalPages: number = pages;
 
   function previous() {
     if (pageNumber <= 1) {
       return;
     }
-    replace(`/feed/${pageNumber - 1}`);
+    urlSearchParams.set('page', (--pageNumber).toString());
+    replace(`${pathname}?${urlSearchParams.toString()}`);
   }
 
   function next() {
     if (pageNumber >= totalPages) {
       return;
     }
-    replace(`/feed/${pageNumber + 1}`);
+    urlSearchParams.set('page', (++pageNumber).toString());
+    replace(`${pathname}?${urlSearchParams.toString()}`);
   }
 
   return (
