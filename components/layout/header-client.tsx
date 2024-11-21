@@ -21,9 +21,9 @@ import {
 import { Avatar, AvatarFallback } from '../ui/avatar';
 
 export default function HeaderClient() {
-  const pathname = usePathname();
+  const pathName = usePathname();
   const isActive: (pathname: string) => boolean = (currentPathname) =>
-    pathname === currentPathname;
+    pathName === currentPathname;
 
   const { data: session, status } = useSession();
 
@@ -33,7 +33,7 @@ export default function HeaderClient() {
         <Link
           href='/'
           className={`${buttonVariants({ variant: 'link' })} ${
-            isActive('/') ? 'underline font-extrabold' : ''
+            pathName.includes('/feed') ? 'underline font-extrabold' : ''
           }`}
         >
           Feed
