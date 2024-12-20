@@ -19,6 +19,7 @@ import {
   CardTitle,
 } from '../ui/card';
 import { Avatar, AvatarFallback } from '../ui/avatar';
+import Logo from './logo';
 
 export default function HeaderClient() {
   const pathName = usePathname();
@@ -109,7 +110,10 @@ export default function HeaderClient() {
   );
 
   return (
-    <nav className='nav flex flex-col md:flex-row justify-between items-end gap-1 mt-1 mb-5 py-4'>
+    <nav className='nav flex flex-col items-center md:flex-row md:justify-start  gap-1 mt-1 mb-5 py-4'>
+      <div className='md:mr-auto'>
+        <Logo />
+      </div>
       {left}
       {right}
     </nav>
