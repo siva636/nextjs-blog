@@ -9,6 +9,7 @@ import { Loader2 } from 'lucide-react';
 export default function Page() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [url, setUrl] = useState('');
   const [createPostError, createPostAction] = useFormState(createPost, null);
   const [createDraftError, createDraftAction] = useFormState(createDraft, null);
 
@@ -18,7 +19,7 @@ export default function Page() {
         className='prose dark:prose-invert flex flex-col space-y-2'
         action={createPostAction}
       >
-        <h1>New post</h1>
+        <h1>New recipe</h1>
         <input
           required
           name='title'
@@ -45,7 +46,22 @@ export default function Page() {
         <div className='text-sm text-red-500 pb-2'>
           {createPostError?.content || createDraftError?.content}
         </div>
-        <Submit createDraftAction={createDraftAction} />
+        <input
+          required
+          name='url'
+          className='rounded border border-gray-400'
+          autoFocus
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder='Image URL'
+          type='text'
+          value={url}
+        />
+        <div className='text-sm text-red-500 pb-2'>
+          {createPostError?.url || createDraftError?.url}
+        </div>
+        <div className='ml-auto'>
+          <Submit createDraftAction={createDraftAction} />
+        </div>
       </form>
     </>
   );

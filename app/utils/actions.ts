@@ -44,6 +44,9 @@ const blogSchema = z.object({
   content: z
     .string({ invalid_type_error: 'Enter valid content' })
     .min(10, { message: 'Must be 10 or more characters long' }),
+  url: z
+    .string({ invalid_type_error: 'Enter valid URL for image' })
+    .url({ message: 'Invalid url' }),
 });
 
 export async function createDraft(previousState: any, formData: FormData) {
@@ -52,6 +55,7 @@ export async function createDraft(previousState: any, formData: FormData) {
   const data = {
     title: formData.get('title') as string,
     content: formData.get('content') as string,
+    url: formData.get('url') as string,
   };
 
   const passedData = blogSchema.safeParse(data);
@@ -79,6 +83,7 @@ export async function createPost(previousState: any, formData: FormData) {
   const data = {
     title: formData.get('title') as string,
     content: formData.get('content') as string,
+    url: formData.get('url') as string,
   };
 
   const passedData = blogSchema.safeParse(data);
