@@ -27,7 +27,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <div className='p-5 bg-gray-100 dark:bg-gray-800 rounded-lg'>
+          <div className='flex flex-col min-h-screen p-5 bg-gray-100 dark:bg-gray-800 rounded-lg'>
             {children}
           </div>
           <Footer />
