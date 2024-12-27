@@ -32,7 +32,7 @@ async function HomeContents({ page }: { page: string | undefined }) {
       <main
         className='grid gap-5'
         style={{
-          'grid-template-columns': 'repeat(auto-fill, minmax(300px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
         }}
       >
         {feed.map((post: any) => (
@@ -40,8 +40,7 @@ async function HomeContents({ page }: { page: string | undefined }) {
             key={post.id}
             className='bg-gray-200 rounded-2xl prose grid'
             style={{
-              'grid-template-rows':
-                '300px min-content min-content 1fr min-content',
+              gridTemplateRows: '300px min-content min-content 1fr min-content',
             }}
           >
             <img
