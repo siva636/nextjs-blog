@@ -3,6 +3,7 @@ import { auth } from '@/auth';
 import PublishForm from './publish/publish-form';
 import DeleteDraftForm from './delete/delete-draft-form';
 import DeletePostForm from './delete/delete-post-form';
+import Image from 'next/image';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const post = await prisma.post.findUnique({
@@ -31,7 +32,9 @@ export default async function Page({ params }: { params: { id: string } }) {
         className='rounded-t-2xl md:rounded-bl-2xl md:rounded-tr-none'
         style={{ flex: '1 1 40%' }}
       >
-        <img
+        <Image
+          width={300}
+          height={300}
           className='h-full w-full rounded-t-2xl md:rounded-bl-2xl md:rounded-tr-none object-cover'
           src={post?.url ? post.url : ''}
           alt={'Image not available'}

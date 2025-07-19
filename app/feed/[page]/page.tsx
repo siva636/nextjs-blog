@@ -6,6 +6,7 @@ import { pageSize } from '@/app/utils/constants';
 import { Button } from '@/components/ui/button';
 import { ChevronRightIcon } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image'
 
 export async function generateStaticParams() {
   return [{ page: '1' }];
@@ -43,7 +44,9 @@ async function HomeContents({ page }: { page: string | undefined }) {
               gridTemplateRows: '300px min-content min-content 1fr min-content',
             }}
           >
-            <img
+            <Image
+              width={300}
+              height={300}
               className='rounded-t-2xl w-full h-full object-cover'
               src={post.url}
               alt={`Image not available for ${post.title}`}
